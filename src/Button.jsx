@@ -1,12 +1,10 @@
-import React, {useState} from 'react';
-
-const Button = ({name, condition}) => {
-  const [active, setActive] = useState()
+import React from 'react';
+import './Button.css';
+const Button = ({name, changeTab}) => {
   return (
-      <button className="button-tab" >
-        {name}
-        {condition}
-      </button>
+      <div className="tabs">
+        <button className="tabs__button" onClick={changeTab}>{name}</button>
+      </div>
   );
 };
 

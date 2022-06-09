@@ -1,13 +1,12 @@
-
+import React from 'react';
 import './App.css';
-import Button from './Button';
+
+import Weather from './Weather';
 
 function App() {
   return (
     <div className="App">
-      <Button name="NOW" condition="active" />
-      <Button name="Details" />
-      <Button name="Forecast" />
+      <Weather />
     </div>
   );
 }
