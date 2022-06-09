@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import Button from './Button';
 import './Weather.css'
+import CurrentWeather from './CurrentWeather';
+import Details from './Details';
 const serverUrl = "https://api.openweathermap.org/data/2.5/weather";
-const forecastUrl = "https://api.openweathermap.org/data/2.5/forecast";
-const apiKey = "3d8af9f7ae111ad0770a6a9d37546134";
+// const forecastUrl = "https://api.openweathermap.org/data/2.5/forecast";
+const apiKey = "50a173c0948ec362d5f23b7e75bea714";
 const cityName = 'Udachny';
 const Weather = () => {
 
@@ -40,17 +42,11 @@ const Weather = () => {
     let response = await fetch(url).catch((err) => alert(err));
     let weather = await response.json().catch((err) => alert(err));
     console.log(weather);
-    let icon =
-        "https://openweathermap.org/img/wn/" +
-        weather["weather"][0].icon +
-        "@2x.png";
+    // let icon ="https://openweathermap.org/img/wn/" + weather["weather"][0].icon +"@2x.png";
     const city = weather.name;
     const temp = weather.main.temp;
-    const weatherClouds = 'clouds';
-    setCurrentWeather({name:city, temp: temp, weather: weather.weather[0].description, icon:icon});
-    // nowWeatherTabItems.temperature.innerHTML = `${Math.floor(weather.main.temp)}`;
-    // nowWeatherTabItems.city.innerHTML = weather.name;
-    // forecastTabItems.city.innerHTML = weather.name;
+    const weatherDescription = weather.weather[0].description;
+    setCurrentWeather({name:city, temp: Math.round(temp), weather: weatherDescription, });
 
   }
 
@@ -58,17 +54,22 @@ const Weather = () => {
     fetchWeather() ;
  },[]);
   return (
+
       <div className="weather">
+        <div className="inputCity">
+          <form action="">
+            <label>
+            <input type="text"/>
+            </label>
+            <input type="submit" value="GO"/>
+          </form>
+        </div>
         {(active[0].active)?
-          <div className="weather__now active">
-          <div className="temp-now">{currentWeather.temp}{currentWeather.name}{currentWeather.weather}
-            <div className="grad_icon">*</div>
-          </div>
-        </div> :<div></div>}
+         <CurrentWeather name={currentWeather.name}
+                          temp={currentWeather.temp}
+                          weather={currentWeather.weather}/>:<div></div>}
         {(active[1].active)?
-          <div className='Details'>
-          Details
-          </div>: <div></div>
+          <Details/>: <div></div>
         }
         {
           (active[2].active)?
