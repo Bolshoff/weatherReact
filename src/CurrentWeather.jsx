@@ -1,12 +1,14 @@
 import React from 'react';
-
-const CurrentWeather = ({name, temp, weather}) => {
+import './CurrentWeather.css'
+const CurrentWeather = ({name, temp, weather,icon, url}) => {
   return (
       <div className="weather__now active">
-        <div className="temp-now">{temp}{weather}
+        <div className="temp-now">{temp}
           <div className="grad_icon">*</div>
         </div>
+        <div className="nowWeather-icon" style={{backgroundImage: `url(${icon})`}}></div>
         <div className='city'>{name}</div>
+        <div className="description" >{weather}</div>
         <div><button>FAV</button></div>
       </div>
   );

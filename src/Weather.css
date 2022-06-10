@@ -6,29 +6,11 @@
     height: 390px;
     border: solid 1px black;
 }
-.weather__now{
-display: flex;
-flex-direction: column;
-justify-content: space-between;
-height: 345px;
-border-bottom: solid 1px black;
-    /*display: none;*/
-}
+
 
 .tabs__buttons{
     display: flex;
 }
-.temp-now {
-    position: absolute;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 70px;
-    line-height: 82px;
-    height: 115px;
-    padding-left: 20px;
-}
-/*.active{*/
-/*    display: block;*/
-/*}*/
+
 
 

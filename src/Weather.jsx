@@ -42,11 +42,18 @@ const Weather = () => {
     let response = await fetch(url).catch((err) => alert(err));
     let weather = await response.json().catch((err) => alert(err));
     console.log(weather);
-    // let icon ="https://openweathermap.org/img/wn/" + weather["weather"][0].icon +"@2x.png";
+     let icon ="https://openweathermap.org/img/wn/" + weather["weather"][0].icon +"@2x.png";
     const city = weather.name;
     const temp = weather.main.temp;
     const weatherDescription = weather.weather[0].description;
-    setCurrentWeather({name:city, temp: Math.round(temp), weather: weatherDescription, });
+    setCurrentWeather({name:city,
+      temp: Math.round(temp),
+      weather: weatherDescription,
+      feels:Math.round(weather.main.feels_like) ,
+      sunrise: weather.sys.sunrise ,
+    sunset: weather.sys.sunrise,
+    url:url,
+    icon:icon});
 
   }
 
@@ -67,9 +74,15 @@ const Weather = () => {
         {(active[0].active)?
          <CurrentWeather name={currentWeather.name}
                           temp={currentWeather.temp}
-                          weather={currentWeather.weather}/>:<div></div>}
+                          weather={currentWeather.weather}
+                          icon={currentWeather.icon}/>:<div></div>}
         {(active[1].active)?
-          <Details/>: <div></div>
+          <Details name={currentWeather.name}
+                   temp={currentWeather.temp}
+                   weather={currentWeather.weather}
+                    feels={currentWeather.feels}
+                   sunrise={currentWeather.sunrise}
+                   sunset={currentWeather.sunset}/>: <div></div>
         }
         {
           (active[2].active)?

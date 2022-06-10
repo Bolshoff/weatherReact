@@ -1,0 +1,22 @@
+.weather__now{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 345px;
+    border-bottom: solid 1px black;
+    /*display: none;*/
+}
+.temp-now {
+    position: absolute;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 70px;
+    line-height: 82px;
+    height: 115px;
+    padding-left: 20px;
+}
+.nowWeather-icon{
+    width: 100px;
+    height: 100px;
+    margin-left: 115px;
+}
