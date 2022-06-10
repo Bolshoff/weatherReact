@@ -3,6 +3,8 @@ import Button from './Button';
 import './Weather.css'
 import CurrentWeather from './CurrentWeather';
 import Details from './Details';
+import Forecast from './Forecast';
+
 const serverUrl = "https://api.openweathermap.org/data/2.5/weather";
 // const forecastUrl = "https://api.openweathermap.org/data/2.5/forecast";
 const apiKey = "50a173c0948ec362d5f23b7e75bea714";
@@ -36,12 +38,12 @@ const Weather = () => {
     ])
   }
 
-  async function fetchWeather(){   // const url = `${serverUrl}?q=${cityName}&appid=${apiKey}&units=metric`;
+  async function fetchWeather(){
     const url = `${serverUrl}?q=${cityName}&appid=${apiKey}&units=metric`;
 
     let response = await fetch(url).catch((err) => alert(err));
     let weather = await response.json().catch((err) => alert(err));
-    console.log(weather);
+
      let icon ="https://openweathermap.org/img/wn/" + weather["weather"][0].icon +"@2x.png";
     const city = weather.name;
     const temp = weather.main.temp;
@@ -86,9 +88,8 @@ const Weather = () => {
         }
         {
           (active[2].active)?
-          <div className='Forecast'>
-            Forecast
-          </div>: <div></div>
+         <Forecast name={currentWeather.name}
+                    apiKey={apiKey}/>: <div></div>
         }
         <div className="tabs__buttons">
           <Button title='Now' name="Now" changeTab={toggleNow}/>
