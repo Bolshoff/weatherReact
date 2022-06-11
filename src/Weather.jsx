@@ -10,7 +10,7 @@ const serverUrl = "https://api.openweathermap.org/data/2.5/weather";
 const apiKey = "50a173c0948ec362d5f23b7e75bea714";
 const cityName = 'Udachny';
 const Weather = () => {
-
+  const [cityName, setCityName] = useState('Udachny')
   const [active, setActive] = useState([{title:'Now', active:true},
     {title:'Details', active:false},
     {title:'Forecast', active:false},
@@ -18,7 +18,7 @@ const Weather = () => {
   const [currentWeather, setCurrentWeather] = useState({});
 
 
-  const toggleNow = (title) =>{
+  const toggleNow = () =>{
     setActive([{title:'Now', active:true},
       {title:'Details', active:false},
       {title:'Forecast', active:false},

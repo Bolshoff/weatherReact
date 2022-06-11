@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from 'react';
-
-
+import './Forecast.css';
 
 const Forecast = ({name, apiKey}) => {
 
   const [forecast, setForecast] = useState([]);
-
 
  async function fetchForecast(){
    const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${name}&appid=${apiKey}&units=metric`;
@@ -14,8 +12,6 @@ const Forecast = ({name, apiKey}) => {
     setForecast(forecast.list)
    console.log(forecast);
   }
-
-
 
   useEffect(()=>{
     fetchForecast();
