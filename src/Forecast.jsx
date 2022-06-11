@@ -10,7 +10,7 @@ const Forecast = ({name, apiKey}) => {
    let response = await fetch(forecastUrl).catch((err) => alert(err));
    let forecast = await response.json().catch((err) => alert(err));
     setForecast(forecast.list)
-   console.log(forecast);
+
   }
 
   useEffect(()=>{

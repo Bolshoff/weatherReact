@@ -8,7 +8,7 @@ import Forecast from './Forecast';
 const serverUrl = "https://api.openweathermap.org/data/2.5/weather";
 // const forecastUrl = "https://api.openweathermap.org/data/2.5/forecast";
 const apiKey = "50a173c0948ec362d5f23b7e75bea714";
-const cityName = 'Udachny';
+// const cityName = 'Udachny';
 const Weather = () => {
   const [cityName, setCityName] = useState('Udachny')
   const [active, setActive] = useState([{title:'Now', active:true},
@@ -17,6 +17,16 @@ const Weather = () => {
   ])
   const [currentWeather, setCurrentWeather] = useState({});
 
+
+  const userCityName = (e)=>{
+    e.preventDefault();
+    fetchWeather();
+
+  }
+  const changeInputCity = (e)=>{
+
+    setCityName(e.target.value);
+  }
 
   const toggleNow = () =>{
     setActive([{title:'Now', active:true},
@@ -66,9 +76,9 @@ const Weather = () => {
 
       <div className="weather">
         <div className="inputCity">
-          <form action="">
+          <form onSubmit={userCityName}>
             <label>
-            <input type="text"/>
+            <input type="text" onChange={changeInputCity} />
             </label>
             <input type="submit" value="GO"/>
           </form>
