@@ -4,11 +4,14 @@ import './Weather.css'
 import CurrentWeather from './CurrentWeather';
 import Details from './Details';
 import Forecast from './Forecast';
+import Favcities from './Favcities';
+import useScreen from './customHooks/useScreen';
+
+ const {width, isMobile, isDesktop} = useScreen(30);
 
 const serverUrl = "https://api.openweathermap.org/data/2.5/weather";
-// const forecastUrl = "https://api.openweathermap.org/data/2.5/forecast";
 const apiKey = "50a173c0948ec362d5f23b7e75bea714";
-// const cityName = 'Udachny';
+
 const Weather = () => {
   const [cityName, setCityName] = useState('Udachny')
   const [active, setActive] = useState([{title:'Now', active:true},
@@ -16,15 +19,22 @@ const Weather = () => {
     {title:'Forecast', active:false},
   ])
   const [currentWeather, setCurrentWeather] = useState({});
+  const [favCities, setFavCities] = useState([]);
 
-
+  const addFavorite = ()=>{
+    const favcity ={
+      id: Date.now(),
+      city: cityName
+    }
+    setFavCities([...favCities, favcity]);
+  }
   const userCityName = (e)=>{
     e.preventDefault();
     fetchWeather();
+    e.target.reset();
 
   }
   const changeInputCity = (e)=>{
-
     setCityName(e.target.value);
   }
 
@@ -46,6 +56,10 @@ const Weather = () => {
       {title:'Details', active:false},
       {title:'Forecast', active:true},
     ])
+  }
+  const delFavorite = (favcity)=>{
+      setFavCities(favCities.filter(city => city.id !== favcity.id))
+
   }
 
   async function fetchWeather(){
@@ -73,7 +87,7 @@ const Weather = () => {
     fetchWeather() ;
  },[]);
   return (
-
+    <div className="widget" >
       <div className="weather">
         <div className="inputCity">
           <form onSubmit={userCityName}>
@@ -87,7 +101,8 @@ const Weather = () => {
          <CurrentWeather name={currentWeather.name}
                           temp={currentWeather.temp}
                           weather={currentWeather.weather}
-                          icon={currentWeather.icon}/>:<div></div>}
+                          icon={currentWeather.icon}
+                          addFavorite={addFavorite}/>:<div></div>}
         {(active[1].active)?
           <Details name={currentWeather.name}
                    temp={currentWeather.temp}
@@ -108,6 +123,11 @@ const Weather = () => {
         </div>
 
       </div>
+      <div className="favcities">
+        <Favcities favCities={favCities} delFavorite={delFavorite} />
+      </div>
+
+    </div>
   );
 };
 

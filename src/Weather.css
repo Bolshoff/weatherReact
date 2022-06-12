@@ -1,3 +1,6 @@
+.widget{
+    display: flex;
+}
 .weather{
     display: flex;
     flex-direction: column;
@@ -7,9 +10,17 @@
     border: solid 1px black;
 }
 
-
 .tabs__buttons{
     display: flex;
+}
+.favorite{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 301px;
+    height: 390px;
+    border: solid 1px black;
 }
 
 
