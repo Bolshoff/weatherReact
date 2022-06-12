@@ -7,7 +7,7 @@ import Forecast from './Forecast';
 import Favcities from './Favcities';
 import useScreen from './customHooks/useScreen';
 
- const {width, isMobile, isDesktop} = useScreen(30);
+
 
 const serverUrl = "https://api.openweathermap.org/data/2.5/weather";
 const apiKey = "50a173c0948ec362d5f23b7e75bea714";
