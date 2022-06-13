@@ -5,7 +5,7 @@ import CurrentWeather from './CurrentWeather';
 import Details from './Details';
 import Forecast from './Forecast';
 import Favcities from './Favcities';
-import useScreen from './customHooks/useScreen';
+
 
 
 
@@ -59,6 +59,7 @@ const Weather = () => {
   }
   const delFavorite = (favcity)=>{
       setFavCities(favCities.filter(city => city.id !== favcity.id))
+
 
   }
 
