@@ -5,6 +5,7 @@ import CurrentWeather from './CurrentWeather';
 import Details from './Details';
 import Forecast from './Forecast';
 import Favcities from './Favcities';
+import useScreen from './customHooks/useScreen';
 
 
 
@@ -20,6 +21,10 @@ const Weather = () => {
   ])
   const [currentWeather, setCurrentWeather] = useState({});
   const [favCities, setFavCities] = useState([]);
+  const {width, isMobile, isDesktop} = useScreen(1280);
+  useEffect(() => {
+    console.log(`Width state now is: ${width}, isDesktop:${isDesktop}, isMobile:${isMobile}`);
+  }, [width]);
 
   const addFavorite = ()=>{
     const favcity ={
