@@ -21,7 +21,7 @@ const Weather = () => {
   ])
   const [currentWeather, setCurrentWeather] = useState({});
   const [favCities, setFavCities] = useState([]);
-  const {width, isMobile, isDesktop} = useScreen(1280);
+  const {width, isMobile, isDesktop} = useScreen(window.innerWidth);
   useEffect(() => {
     console.log(`Width state now is: ${width}, isDesktop:${isDesktop}, isMobile:${isMobile}`);
   }, [width]);
