@@ -25,7 +25,8 @@ const Forecast = ({name, apiKey}) => {
         {forecast.map(elem =>
 
           <div key={elem.dt}>
-            {elem.main.temp}
+           Temperatuer: {elem.main.temp}<br/>
+           Feels like: {elem.main.feels_like}
           </div>
         )}
       </div>
