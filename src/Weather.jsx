@@ -6,6 +6,7 @@ import Details from './Details';
 import Forecast from './Forecast';
 import Favcities from './Favcities';
 import useScreen from './customHooks/useScreen';
+import {useDispatch, useSelector} from 'react-redux';
 
 
 
@@ -14,6 +15,10 @@ const serverUrl = "https://api.openweathermap.org/data/2.5/weather";
 const apiKey = "50a173c0948ec362d5f23b7e75bea714";
 
 const Weather = () => {
+
+const dispatch = useDispatch();
+const currentCity = useSelector(state => state.cityName);
+  console.log(currentCity);
   const [cityName, setCityName] = useState('Udachny')
   const [active, setActive] = useState([{title:'Now', active:true},
     {title:'Details', active:false},
@@ -64,8 +69,6 @@ const Weather = () => {
   }
   const delFavorite = (favcity)=>{
       setFavCities(favCities.filter(city => city.id !== favcity.id))
-
-
   }
 
   async function fetchWeather(){
