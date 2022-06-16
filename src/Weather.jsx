@@ -7,7 +7,12 @@ import Forecast from './Forecast';
 import Favcities from './Favcities';
 import useScreen from './customHooks/useScreen';
 import {useDispatch, useSelector} from 'react-redux';
-import {handleInputChange, setCurrentCity} from './actions/actions';
+import {
+  ADD_FAVORITE_CITIES,
+
+  handleInputChange,
+  setCurrentCity,
+} from './actions/actions';
 
 
 
@@ -18,11 +23,12 @@ const apiKey = "50a173c0948ec362d5f23b7e75bea714";
 const Weather = () => {
 
 const dispatch = useDispatch();
-const currentCity = useSelector(state => state.cityName);
-const cityName = currentCity; //еслт не сработает удалитть
-  console.log(useSelector(state=>state));
-  console.log(currentCity);
-  // const [cityName, setCityName] = useState('Udachny')
+const currentCity = useSelector(state => state.currentCityReducer.cityName);
+const cityName = currentCity;
+const favoriteCities = useSelector(state => state.favoriteCitiesReducer)
+
+  console.log(favoriteCities);
+
   const [active, setActive] = useState([{title:'Now', active:true},
     {title:'Details', active:false},
     {title:'Forecast', active:false},
@@ -36,12 +42,13 @@ const cityName = currentCity; //еслт не сработает удалитт�
 
 
 
-  const addFavorite = ()=>{
+  const addFavorite = (cityName)=>{
     const favcity ={
       id: Date.now(),
-      city: cityName
+      cityName
     }
-    setFavCities([...favCities, favcity]);
+    // setFavCities([...favCities, favcity]);
+    dispatch({type:"ADD_FAVORITE_CITIES",payload: favcity});
   }
   const userCityName = (e)=>{
     e.preventDefault();
@@ -119,7 +126,7 @@ const cityName = currentCity; //еслт не сработает удалитт�
                           temp={currentWeather.temp}
                           weather={currentWeather.weather}
                           icon={currentWeather.icon}
-                          addFavorite={addFavorite}/>:<div></div>}
+                          addFavorite={addFavorite(cityName)}/>:<div></div>}
         {(active[1].active)?
           <Details name={currentWeather.name}
                    temp={currentWeather.temp}
@@ -141,7 +148,8 @@ const cityName = currentCity; //еслт не сработает удалитт�
 
       </div>
       <div className="favcities">
-        <Favcities favCities={favCities} delFavorite={delFavorite} />
+        {/*<Favcities favCities={favCities} delFavorite={delFavorite} />*/}
+        <Favcities favoriteCities={favoriteCities} delFavorite={delFavorite} />
       </div>
 
     </div>

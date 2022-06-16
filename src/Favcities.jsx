@@ -2,20 +2,20 @@ import React from 'react';
 import './Favcities.css';
 import FavCitiesItem from './FavCitiesItem';
 
-const Favcities = ({favCities, delFavorite}) => {
-
-
+const Favcities = ({favoriteCities, delFavorite}) => {
 
   return (
       <div className="favorite">
         <div className="fav_description">
           <p>Added location:</p>
         </div>
+
         <div className="favorite-cities">
-          {favCities.map(city=>
+          {favoriteCities.map(city=>
            <FavCitiesItem  delFavorite={delFavorite} favcity={city} key={city.id}/>
           )}
         </div>
+
       </div>
   );
 };
