@@ -7,6 +7,7 @@ import Forecast from './Forecast';
 import Favcities from './Favcities';
 import useScreen from './customHooks/useScreen';
 import {useDispatch, useSelector} from 'react-redux';
+import {handleInputChange, setCurrentCity} from './actions/actions';
 
 
 
@@ -18,8 +19,10 @@ const Weather = () => {
 
 const dispatch = useDispatch();
 const currentCity = useSelector(state => state.cityName);
+const cityName = currentCity; //еслт не сработает удалитть
+  console.log(useSelector(state=>state));
   console.log(currentCity);
-  const [cityName, setCityName] = useState('Udachny')
+  // const [cityName, setCityName] = useState('Udachny')
   const [active, setActive] = useState([{title:'Now', active:true},
     {title:'Details', active:false},
     {title:'Forecast', active:false},
@@ -31,6 +34,8 @@ const currentCity = useSelector(state => state.cityName);
     console.log(`Width state now is: ${width}, isDesktop:${isDesktop}, isMobile:${isMobile}`);
   }, [width]);
 
+
+
   const addFavorite = ()=>{
     const favcity ={
       id: Date.now(),
@@ -40,12 +45,15 @@ const currentCity = useSelector(state => state.cityName);
   }
   const userCityName = (e)=>{
     e.preventDefault();
+    dispatch(setCurrentCity(cityName))
     fetchWeather();
     e.target.reset();
 
   }
   const changeInputCity = (e)=>{
-    setCityName(e.target.value);
+    // setCityName(e.target.value);
+    handleInputChange(e.target.value)
+
   }
 
   const toggleNow = () =>{
@@ -72,6 +80,7 @@ const currentCity = useSelector(state => state.cityName);
   }
 
   async function fetchWeather(){
+
     const url = `${serverUrl}?q=${cityName}&appid=${apiKey}&units=metric`;
 
     let response = await fetch(url).catch((err) => alert(err));
