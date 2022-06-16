@@ -12,7 +12,7 @@ export function setCurrentCity(city){
           cityName: city
     }}
 }
-export const handleInputChange = (name, value) => {
+export const handleInputChange = (value) => {
   return {
     type: HANDLE_INPUT_CHANGE,
     payload: { cityName: value}

@@ -51,9 +51,8 @@ const cityName = currentCity; //еслт не сработает удалитт�
 
   }
   const changeInputCity = (e)=>{
-    // setCityName(e.target.value);
-    handleInputChange(e.target.value)
-
+    const value = e.target.value
+    dispatch(handleInputChange(value));
   }
 
   const toggleNow = () =>{
