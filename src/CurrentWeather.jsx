@@ -1,5 +1,6 @@
 import React from 'react';
 import './CurrentWeather.css'
+
 const CurrentWeather = ({name, temp, weather,icon, addFavorite}) => {
   return (
       <div className="weather__now active">

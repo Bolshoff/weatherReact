@@ -3,7 +3,7 @@ import React from 'react';
 const FavCitiesItem = ({delFavorite, favcity}) => {
 
   return (
-      <div >* {favcity.city}
+      <div >* {favcity.cityName}
         <button className="delfavorite"
                 onClick={()=>delFavorite(favcity)}>
           x

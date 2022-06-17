@@ -8,8 +8,7 @@ import Favcities from './Favcities';
 import useScreen from './customHooks/useScreen';
 import {useDispatch, useSelector} from 'react-redux';
 import {
-  ADD_FAVORITE_CITIES,
-
+ addFavoriteCities,
   handleInputChange,
   setCurrentCity,
 } from './actions/actions';
@@ -25,8 +24,7 @@ const Weather = () => {
 const dispatch = useDispatch();
 const currentCity = useSelector(state => state.currentCityReducer.cityName);
 const cityName = currentCity;
-const favoriteCities = useSelector(state => state.favoriteCitiesReducer)
-
+const favoriteCities = useSelector(state => state.favoriteCitiesReducer.favoriteCities)
   console.log(favoriteCities);
 
   const [active, setActive] = useState([{title:'Now', active:true},
@@ -42,13 +40,9 @@ const favoriteCities = useSelector(state => state.favoriteCitiesReducer)
 
 
 
-  const addFavorite = (cityName)=>{
-    const favcity ={
-      id: Date.now(),
-      cityName
-    }
-    // setFavCities([...favCities, favcity]);
-    dispatch({type:"ADD_FAVORITE_CITIES",payload: favcity});
+  const addFavorite = ()=>{
+    console.log(currentCity);
+    dispatch(addFavoriteCities(currentCity));
   }
   const userCityName = (e)=>{
     e.preventDefault();
@@ -122,11 +116,11 @@ const favoriteCities = useSelector(state => state.favoriteCitiesReducer)
           </form>
         </div>
         {(active[0].active)?
-         <CurrentWeather name={currentWeather.name}
+         <CurrentWeather name={cityName}
                           temp={currentWeather.temp}
                           weather={currentWeather.weather}
                           icon={currentWeather.icon}
-                          addFavorite={addFavorite(cityName)}/>:<div></div>}
+                          addFavorite={addFavorite}/>:<div></div>}
         {(active[1].active)?
           <Details name={currentWeather.name}
                    temp={currentWeather.temp}
