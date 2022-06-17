@@ -22,4 +22,3 @@ const Favcities = ({favoriteCities, delFavorite}) => {
 
 export default Favcities;
 
-//todo del function in progress

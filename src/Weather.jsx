@@ -8,7 +8,7 @@ import Favcities from './Favcities';
 import useScreen from './customHooks/useScreen';
 import {useDispatch, useSelector} from 'react-redux';
 import {
- addFavoriteCities,
+  addFavoriteCities, DELETE_FAVORITE_CITY, delFavoriteCity,
   handleInputChange,
   setCurrentCity,
 } from './actions/actions';
@@ -25,7 +25,7 @@ const dispatch = useDispatch();
 const currentCity = useSelector(state => state.currentCityReducer.cityName);
 const cityName = currentCity;
 const favoriteCities = useSelector(state => state.favoriteCitiesReducer.favoriteCities)
-  console.log(favoriteCities);
+
 
   const [active, setActive] = useState([{title:'Now', active:true},
     {title:'Details', active:false},
@@ -41,7 +41,7 @@ const favoriteCities = useSelector(state => state.favoriteCitiesReducer.favorite
 
 
   const addFavorite = ()=>{
-    console.log(currentCity);
+
     dispatch(addFavoriteCities(currentCity));
   }
   const userCityName = (e)=>{
@@ -76,7 +76,8 @@ const favoriteCities = useSelector(state => state.favoriteCitiesReducer.favorite
     ])
   }
   const delFavorite = (favcity)=>{
-      setFavCities(favCities.filter(city => city.id !== favcity.id))
+    // dispatch(delFavoriteCity())
+    dispatch({type:DELETE_FAVORITE_CITY,payload:favcity.id })
   }
 
   async function fetchWeather(){

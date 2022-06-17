@@ -1,4 +1,4 @@
-import {ADD_FAVORITE_CITIES} from '../actions/actions';
+import {ADD_FAVORITE_CITIES, DELETE_FAVORITE_CITY} from '../actions/actions';
 
 const defaultState = {
   favoriteCities: []
@@ -10,6 +10,12 @@ const favoriteCitiesReducer = (state = defaultState, action)=>{
       return {
         ...state,
         favoriteCities: [...state.favoriteCities, action.payload]
+      }
+    case DELETE_FAVORITE_CITY:
+      return {
+        ...state,
+        favoriteCities: state.favoriteCities.filter((city) => city.id !== action.payload)
+
       }
 
     default:
