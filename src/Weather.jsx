@@ -8,7 +8,7 @@ import Favcities from './Favcities';
 import useScreen from './customHooks/useScreen';
 import {useDispatch, useSelector} from 'react-redux';
 import {
-  addFavoriteCities, DELETE_FAVORITE_CITY, delFavoriteCity,
+  addFavoriteCities, DELETE_FAVORITE_CITY, handleCountCity,
   handleInputChange,
   setCurrentCity,
 } from './actions/actions';
@@ -24,7 +24,8 @@ const Weather = () => {
 const dispatch = useDispatch();
 const currentCity = useSelector(state => state.currentCityReducer.cityName);
 const cityName = currentCity;
-const favoriteCities = useSelector(state => state.favoriteCitiesReducer.favoriteCities)
+const favoriteCities = useSelector(state => state.favoriteCitiesReducer.favoriteCities);
+const cityCounter = useSelector(state => state.countCityReducer.count);
 
 
   const [active, setActive] = useState([{title:'Now', active:true},
@@ -32,7 +33,7 @@ const favoriteCities = useSelector(state => state.favoriteCitiesReducer.favorite
     {title:'Forecast', active:false},
   ])
   const [currentWeather, setCurrentWeather] = useState({});
-  const [favCities, setFavCities] = useState([]);
+
   const {width, isMobile, isDesktop} = useScreen(window.innerWidth);
   useEffect(() => {
     console.log(`Width state now is: ${width}, isDesktop:${isDesktop}, isMobile:${isMobile}`);
@@ -46,7 +47,8 @@ const favoriteCities = useSelector(state => state.favoriteCitiesReducer.favorite
   }
   const userCityName = (e)=>{
     e.preventDefault();
-    dispatch(setCurrentCity(cityName))
+    dispatch(setCurrentCity(cityName));
+    dispatch(handleCountCity(cityCounter));
     fetchWeather();
     e.target.reset();
 
@@ -143,7 +145,7 @@ const favoriteCities = useSelector(state => state.favoriteCitiesReducer.favorite
 
       </div>
       <div className="favcities">
-        {/*<Favcities favCities={favCities} delFavorite={delFavorite} />*/}
+
         <Favcities favoriteCities={favoriteCities} delFavorite={delFavorite} />
       </div>
 
